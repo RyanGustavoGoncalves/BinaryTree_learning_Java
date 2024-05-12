@@ -43,6 +43,6 @@ public class BinaryTreeService {
         if (!binaryTree.search(data)) {
             throw new IllegalArgumentException("Valor " + data + " não encontrado na árvore.");
         }
-        binaryTree.remove(data);
+        binaryTree.remove(binaryTree.getRoot(), data);
     }
 }

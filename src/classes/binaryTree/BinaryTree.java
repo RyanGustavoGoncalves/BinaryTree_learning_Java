@@ -1,4 +1,5 @@
 package classes.binaryTree;
+
 import classes.node.Node;
 
 public class BinaryTree {
@@ -30,7 +31,7 @@ public class BinaryTree {
         return searchRec(root, data);
     }
 
-    private Node remove(Node root, int data) {
+    public Node remove(Node root, int data) {
         if (root == null) {
             return root;
         }
@@ -46,12 +47,26 @@ public class BinaryTree {
                 return root.getLeft();
             }
 
+            // Encontre o menor valor na subárvore direita para substituir o valor do nó atual
             root.setData(minValue(root.getRight()));
+
+            // Remova o nó com o menor valor da subárvore direita
             root.setRight(remove(root.getRight(), root.getData()));
         }
 
         return root;
     }
+
+    // Método auxiliar para encontrar o menor valor na subárvore
+    private int minValue(Node root) {
+        int minValue = root.getData();
+        while (root.getLeft() != null) {
+            minValue = root.getLeft().getData();
+            root = root.getLeft();
+        }
+        return minValue;
+    }
+
 
     private boolean searchRec(Node root, int data) {
         if (root == null)
@@ -76,5 +91,13 @@ public class BinaryTree {
             System.out.print(root.getData() + " ");
             inOrderRec(root.getRight());
         }
+    }
+
+    public Node getRoot() {
+        return root;
+    }
+
+    public void setRoot(Node root) {
+        this.root = root;
     }
 }
